@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { Autocomplete, TextField } from "@mui/material";
+import WalletIcon from "@mui/icons-material/Wallet";
 
 export const TopHeader = () => {
     return (
@@ -23,6 +24,9 @@ export const TopHeader = () => {
                 <Menu>Explore</Menu>
                 <Menu>Create</Menu>
             </MenuView>
+            <IconView>
+                <WalletIcon />
+            </IconView>
         </TopHeaderView>
     );
 };
@@ -54,4 +58,8 @@ const MenuView = styled.div`
 const Menu = styled.div`
     padding: 0 16px;
     font-weight: 700;
+`;
+
+const IconView = styled.div`
+    margin-left: 32px;
 `;
