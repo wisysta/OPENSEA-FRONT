@@ -55,6 +55,7 @@ export const WalletContextProvider = ({ children }: PropsWithChildren) => {
             signature: result,
         });
 
+        // 엑세스 토큰 만료, 리프레시 토큰 발급 및 저장 로직은 이번코딩에선 생략
         setAccessToken(authResult.data.accessToken);
     }, []);
 
