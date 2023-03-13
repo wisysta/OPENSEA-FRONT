@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { Autocomplete, TextField } from "@mui/material";
 import WalletIcon from "@mui/icons-material/Wallet";
+import { WalletContext } from "@/context";
 
 export const TopHeader = () => {
+    const { login } = useContext(WalletContext);
+
     return (
         <TopHeaderView>
             <Image src="/logo.svg" alt="logo" width={40} height={40} />
@@ -24,7 +27,7 @@ export const TopHeader = () => {
                 <Menu>Explore</Menu>
                 <Menu>Create</Menu>
             </MenuView>
-            <IconView>
+            <IconView onClick={login}>
                 <WalletIcon />
             </IconView>
         </TopHeaderView>
