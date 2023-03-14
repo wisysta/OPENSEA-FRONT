@@ -4,14 +4,19 @@ import Image from "next/image";
 import { Autocomplete, TextField } from "@mui/material";
 import WalletIcon from "@mui/icons-material/Wallet";
 import { WalletContext } from "@/context";
+import Link from "next/link";
 
 export const TopHeader = () => {
     const { login } = useContext(WalletContext);
 
     return (
         <TopHeaderView>
-            <Image src="/logo.svg" alt="logo" width={40} height={40} />
-            <Title>OpenSea</Title>
+            <Link href="/">
+                <Logo>
+                    <Image src="/logo.svg" alt="logo" width={40} height={40} />
+                    <Title>OpenSea</Title>
+                </Logo>
+            </Link>
             <SearchView>
                 <Autocomplete
                     renderInput={(params) => (
@@ -24,8 +29,10 @@ export const TopHeader = () => {
                 />
             </SearchView>
             <MenuView>
-                <Menu>Explore</Menu>
-                <Menu>Create</Menu>
+                <Menu>Explore</Menu>\
+                <Link href="/create">
+                    <Menu>Create</Menu>
+                </Link>
             </MenuView>
             <IconView onClick={login}>
                 <WalletIcon />
@@ -39,6 +46,13 @@ const TopHeaderView = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+
+const Logo = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -61,6 +75,7 @@ const MenuView = styled.div`
 const Menu = styled.div`
     padding: 0 16px;
     font-weight: 700;
+    cursor: pointer;
 `;
 
 const IconView = styled.div`
