@@ -1,39 +1,60 @@
-import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import Image from "next/image";
 import { Autocomplete, TextField } from "@mui/material";
+import Image from "next/image";
+import React, { useContext } from "react";
 import WalletIcon from "@mui/icons-material/Wallet";
-import { WalletContext } from "@/context";
+import { WalletContext } from "../../context";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const TopHeader = () => {
     const { login } = useContext(WalletContext);
+
+    const router = useRouter();
+
+    const onKeyDown = (e: any) => {
+        if (
+            e.code === "Enter" &&
+            /^(0x)?[\wa-zA-Z]{40}$/.test(e.target.value || "")
+        ) {
+            router.push(`/list/${e.target.value}`);
+        }
+    };
 
     return (
         <TopHeaderView>
             <Link href="/">
                 <Logo>
-                    <Image src="/logo.svg" alt="logo" width={40} height={40} />
+                    <Image
+                        src="/opensea.svg"
+                        width={40}
+                        height={40}
+                        alt="logo"
+                    />
                     <Title>OpenSea</Title>
                 </Logo>
             </Link>
+
             <SearchView>
                 <Autocomplete
                     renderInput={(params) => (
                         <TextField
                             {...params}
                             label={"Search items, collections, and accounts"}
+                            onKeyDown={onKeyDown}
                         />
                     )}
                     options={[]}
                 />
             </SearchView>
+
             <MenuView>
-                <Menu>Explore</Menu>\
+                <Menu>Explore</Menu>
                 <Link href="/create">
                     <Menu>Create</Menu>
                 </Link>
             </MenuView>
+
             <IconView onClick={login}>
                 <WalletIcon />
             </IconView>

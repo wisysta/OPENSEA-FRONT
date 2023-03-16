@@ -35,25 +35,25 @@ const List: NextPage = () => {
                 <Grid container spacing={2}>
                     {nfts?.pages.map((page) => {
                         return page.result.map((nft: any) => (
-                            // <Link
-                            //     key={`${address}-nft-${nft.tokenId}`}
-                            //     href={`/list/${address}/${parseInt(
-                            //         nft.tokenId,
-                            //         16
-                            //     )}`}
-                            // >
                             <Grid item xs={3}>
-                                <NftContainer>
-                                    <NftImage src={nft.image} />
-                                    <NftInfo>
-                                        <TokenId>
-                                            #{parseInt(nft.tokenId, 16)}
-                                        </TokenId>
-                                        <TokenPrice>10.000 ETH</TokenPrice>
-                                    </NftInfo>
-                                </NftContainer>
+                                <Link
+                                    key={`${address}-nft-${nft.tokenId}`}
+                                    href={`/list/${address}/${parseInt(
+                                        nft.tokenId,
+                                        16
+                                    )}`}
+                                >
+                                    <NftContainer>
+                                        <NftImage src={nft.image} />
+                                        <NftInfo>
+                                            <TokenId>
+                                                #{parseInt(nft.tokenId, 16)}
+                                            </TokenId>
+                                            <TokenPrice>10.000 ETH</TokenPrice>
+                                        </NftInfo>
+                                    </NftContainer>
+                                </Link>
                             </Grid>
-                            // </Link>
                         ));
                     })}
                 </Grid>
