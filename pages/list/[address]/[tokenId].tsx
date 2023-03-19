@@ -189,12 +189,13 @@ const TokenDetailPage: NextPage = () => {
                             </Grid>
                         </Grid>
                     </MainContainer>
-                    {/* <SellModal
+                    <SellModal
                         open={sellModalOpen}
                         setOpen={setSellModalOpen}
                         contract={address}
                         tokenId={tokenId}
                     />
+
                     <OfferModal
                         open={offerModalOpen}
                         setOpen={setOfferModalOpen}
@@ -207,7 +208,7 @@ const TokenDetailPage: NextPage = () => {
                         contract={address}
                         tokenId={tokenId}
                         offer={offer}
-                    /> */}
+                    />
                 </Container>
             )}
         </div>

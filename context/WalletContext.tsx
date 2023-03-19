@@ -1,5 +1,11 @@
 import Web3 from "web3";
-import { createContext, PropsWithChildren, useCallback, useState } from "react";
+import {
+    createContext,
+    PropsWithChildren,
+    useCallback,
+    useState,
+    useEffect,
+} from "react";
 import Axios from "axios";
 
 declare const window: any;
@@ -60,6 +66,21 @@ export const WalletContextProvider = ({ children }: PropsWithChildren) => {
         setAccessToken(authResult.data.accessToken);
         setAccount(account);
     }, []);
+
+    useEffect(() => {
+        if (web3) {
+            const reset = () => {
+                setAccount("");
+                setAccessToken("");
+                login();
+            };
+
+            const event = window?.ethereum.on("accountsChanged", reset);
+
+            return () =>
+                window?.ethereum.removeListener("accountsChanged", reset);
+        }
+    }, [web3, login]);
 
     return (
         <WalletContext.Provider value={{ web3, account, login }}>

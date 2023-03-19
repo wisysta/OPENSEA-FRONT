@@ -14,9 +14,9 @@ import {
 import { WalletContext } from "../context";
 
 const PROXY_REGISTRY_CONTRACT_ADDRESS =
-    "0xf88185e468CfbC312DFA35E430aE7a3F1249103A";
+    "0x0ae8388935A0e95a1CA040581Afb7Fa9dE818EA2";
 
-const EXCHANGE_ADDRESS = "0x47fBca5f5Db4dd924E04630A98a348C256d0E421";
+const EXCHANGE_ADDRESS = "0x7BF100a9946D4F6726C6cC3FcE78E9fFE469BC53";
 
 const WETH_CONTRACT_ADDRESS = "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6";
 
@@ -190,6 +190,7 @@ export const useOrder = () => {
 
         const sig = await signOrder(web3, account, JSON.parse(order.data.raw));
         const sigResult = await verifySellOrder(order.data.id, sig);
+        console.log(sigResult);
     };
 
     const buyOrder = async (sellOrder: any) => {
@@ -206,7 +207,7 @@ export const useOrder = () => {
         const sigResult = await verifyBuyOrder(buyOrderResult.data, sig);
 
         const price = new BN(
-            buyOrderResult.data.basePrice.replace(/0x0+/, ""),
+            buyOrderResult.data.basePrice.replace(/0x/, ""),
             16
         );
         const fee = price.divn(40);
@@ -221,7 +222,8 @@ export const useOrder = () => {
             .send({
                 from: account,
                 value: price.add(fee),
-            });
+            })
+            .on("receipt", () => {});
     };
 
     const hasWETHAllowance = async () => {
